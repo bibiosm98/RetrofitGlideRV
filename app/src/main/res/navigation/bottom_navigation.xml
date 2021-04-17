@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/listViewFragment">
+
+    <fragment
+        android:id="@+id/listViewFragment"
+        android:name="com.example.retrofitglide.ui.list.ListViewFragment"
+        android:label="List View"
+        tools:layout="@layout/list_view_fragment" />
+
+    <fragment
+        android:id="@+id/gridViewFragment"
+        android:name="com.example.retrofitglide.ui.grid.GridViewFragment"
+        android:label="Grid View"
+        tools:layout="@layout/grid_view_fragment" />
+
+</navigation>

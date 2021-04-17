@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Retrofit&amp;Glide</string>
+    <string name="listItem">List View</string>
+    <string name="gridItem">Grid View</string>
+</resources>
