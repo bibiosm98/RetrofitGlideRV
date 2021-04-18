@@ -16,6 +16,20 @@
         android:id="@+id/gridViewFragment"
         android:name="com.example.retrofitglide.ui.grid.GridViewFragment"
         android:label="Grid View"
-        tools:layout="@layout/grid_view_fragment" />
+        tools:layout="@layout/grid_view_fragment" >
+        <action
+            android:id="@+id/show_detail"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.retrofitglide.ui.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/detail_fragment">
+        <argument
+            android:name="selectedComic"
+            app:argType="com.example.retrofitglide.network.Comic" />
+
+    </fragment>
 
 </navigation>

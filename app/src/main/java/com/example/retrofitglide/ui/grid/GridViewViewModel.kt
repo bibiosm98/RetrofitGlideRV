@@ -1,6 +1,5 @@
 package com.example.retrofitglide.ui.grid
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,6 +44,10 @@ class GridViewViewModel : ViewModel() {
         getMarvelAppComics()
     }
 
+    private val _navigateToSelectedComic = MutableLiveData<Comic>()
+    val navigateToSelectedComic: LiveData<Comic>
+         get() = _navigateToSelectedComic
+
     // get link from API
     private fun getMarvelAppComics(){
         coroutineScope.launch {
@@ -61,5 +64,13 @@ class GridViewViewModel : ViewModel() {
                 _comicList.value = ArrayList()
             }
         }
+    }
+
+    fun displayComicDetails(comic: Comic) {
+        _navigateToSelectedComic.value = comic
+    }
+
+    fun displayComicDetailsComplete() {
+        _navigateToSelectedComic.value = null
     }
 }

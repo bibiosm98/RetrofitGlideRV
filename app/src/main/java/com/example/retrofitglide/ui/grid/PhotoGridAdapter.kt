@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitglide.databinding.GridViewItemBinding
 import com.example.retrofitglide.network.Comic
 
-class PhotoGridAdapter : ListAdapter<Comic, PhotoGridAdapter.ComicViewHolder>(DiffCallback){
+class PhotoGridAdapter(private val onClickListener: OnClickListener) : ListAdapter<Comic, PhotoGridAdapter.ComicViewHolder>(DiffCallback){
     class ComicViewHolder(private var binding: GridViewItemBinding) :
             RecyclerView.ViewHolder(binding.root) {
         fun bind(comic: Comic){
@@ -34,7 +34,13 @@ class PhotoGridAdapter : ListAdapter<Comic, PhotoGridAdapter.ComicViewHolder>(Di
 
     override fun onBindViewHolder(holder: PhotoGridAdapter.ComicViewHolder, position: Int) {
         val comic = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onclick(comic)
+        }
         holder.bind(comic)
     }
 
+    class OnClickListener(val clickListener: (comic: Comic) -> Unit) {
+        fun onclick(comic: Comic) = clickListener(comic)
+    }
 }
