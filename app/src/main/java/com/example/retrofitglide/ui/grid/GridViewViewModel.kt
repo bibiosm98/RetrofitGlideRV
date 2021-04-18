@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+enum class MarvelApiStatus { LOADING, ERROR, DONE}
 class GridViewViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>()
@@ -18,11 +19,11 @@ class GridViewViewModel : ViewModel() {
         get() = _text
 
     init {
-        _text.value = "Welcome in Griw View Fragment"
+        _text.value = "Welcome in Grid View Fragment"
     }
 
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String>
+    private val _status = MutableLiveData<MarvelApiStatus>()
+    val status: LiveData<MarvelApiStatus>
         get() = _status
 
     private val _comicList = MutableLiveData<List<Comic>>()
@@ -49,17 +50,15 @@ class GridViewViewModel : ViewModel() {
         coroutineScope.launch {
             val getPropertyDeferred = MarvelApi.retrofitService.getComics()
             try{
+                _status.value = MarvelApiStatus.LOADING
                 val listResult = getPropertyDeferred.await()
-                _status.value = "WITAMY"
                 if(listResult.data.total > 0){
-//                    listResult.data.results[4].thumbnail.path = listResult.data.results[4].thumbnail.path.plus("/portrait_xlarge.jpg")
-                    listResult.data.results[4].thumbnail.path = listResult.data.results[4].thumbnail.path.plus("/portrait_uncanny.jpg")
-                    _comic.value = listResult.data.results[4]
-                    _comic2.value = listResult.data.results[4].thumbnail.path
-                    Log.i("HomeVM 2", _comic.value!!.thumbnail.path + " 2x  " + listResult.data.results[4].thumbnail.path)
+                    _status.value = MarvelApiStatus.DONE
+                    _comicList.value = listResult.data.results
                 }
             }catch (t: Throwable) {
-                _status.value = "Failure: " + t.message
+                _status.value = MarvelApiStatus.ERROR
+                _comicList.value = ArrayList()
             }
         }
     }

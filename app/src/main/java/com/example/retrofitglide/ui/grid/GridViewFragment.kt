@@ -9,18 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.retrofitglide.databinding.GridViewFragmentBinding
 
 class GridViewFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = GridViewFragment()
-    }
-
     private lateinit var viewModel: GridViewViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                 savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProvider(this).get(GridViewViewModel::class.java)
 
-//        val binding = ImageItemBinding.inflate(inflater)
         val binding = GridViewFragmentBinding.inflate(inflater)
 
         binding.viewModel = viewModel
@@ -28,6 +22,10 @@ class GridViewFragment : Fragment() {
 ////            binding.textHome.text = it.thumbnail.path
 //        })
         binding.lifecycleOwner = this
+
+        binding.imagesGrid.adapter = PhotoGridAdapter()
+
+
         return binding.root
     }
 

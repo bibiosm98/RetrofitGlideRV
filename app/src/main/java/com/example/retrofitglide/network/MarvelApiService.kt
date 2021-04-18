@@ -24,7 +24,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MarvelApiService{
-    @GET("v1/public/comics?ts=1&apikey=080a502746c8a60aeab043387a56eef0&hash=6edc18ab1a954d230c1f03c590d469d2")
+    @GET("v1/public/comics?ts=1&apikey=080a502746c8a60aeab043387a56eef0&hash=6edc18ab1a954d230c1f03c590d469d2&limit=100")
     fun getComics():
             Deferred<ComicProperty>
 }
