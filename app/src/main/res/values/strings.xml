@@ -2,4 +2,8 @@
     <string name="app_name">Retrofit&amp;Glide</string>
     <string name="listItem">List View</string>
     <string name="gridItem">Grid View</string>
+    <string name="show_antman">Ant Man</string>
+    <string name="show_ironman">Iron Man</string>
+    <string name="show_spiderman">Spider Man</string>
+    <string name="show_all">All comics</string>
 </resources>
