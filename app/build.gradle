@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt' //
+apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
-
     defaultConfig {
         applicationId "com.example.retrofitglide"
         minSdkVersion 28
@@ -20,9 +21,23 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'String', "apiKey", localProperties['myApiKey']
+            resValue 'string', "api_key", localProperties['myApiKey']
+            buildConfigField 'String', "apiHash", localProperties['myHash']
+            resValue 'string', "api_hash", localProperties['myHash']
+            buildConfigField 'String', "apiTimestamp", localProperties['myTimestamp']
+            resValue 'string', "api_timestamp", localProperties['myTimestamp']
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "apiKey", localProperties['myApiKey']
+            resValue 'string', "api_key", localProperties['myApiKey']
+            buildConfigField 'String', "apiHash", localProperties['myHash']
+            resValue 'string', "api_hash", localProperties['myHash']
+            buildConfigField 'String', "apiTimestamp", localProperties['myTimestamp']
+            resValue 'string', "api_timestamp", localProperties['myTimestamp']
         }
     }
 

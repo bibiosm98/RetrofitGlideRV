@@ -3,6 +3,7 @@ package com.example.retrofitglide.ui.grid
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.retrofitglide.BuildConfig
 import com.example.retrofitglide.network.Comic
 import com.example.retrofitglide.network.ComicApiFilter
 import com.example.retrofitglide.network.MarvelApi
@@ -18,23 +19,20 @@ class GridViewViewModel : ViewModel() {
     val status: LiveData<MarvelApiStatus>
         get() = _status
 
+    private val _limit = MutableLiveData<Int>()
+    val limit: LiveData<Int>
+        get() = _limit
+
     private val _comicList = MutableLiveData<List<Comic>>()
     val comicList: LiveData<List<Comic>>
         get() = _comicList
-
-//    private val _comic = MutableLiveData<Comic>()
-//    val comic: LiveData<Comic>
-//        get() = _comic
-//    private val _comic2 = MutableLiveData<String>()
-//    val comic2: LiveData<String>
-//        get() = _comic2
-
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
         getMarvelAppComics(ComicApiFilter.SHOW_ALL)
+        _limit.value = 5;
     }
 
     private val _navigateToSelectedComic = MutableLiveData<Comic>()
@@ -44,8 +42,13 @@ class GridViewViewModel : ViewModel() {
     // get link from API
     private fun getMarvelAppComics(filter: ComicApiFilter?){
         coroutineScope.launch {
-//            val getPropertyDeferred = MarvelApi.retrofitService.getComics(filter.value)
-            val getPropertyDeferred = MarvelApi.retrofitService.getComics("1", "080a502746c8a60aeab043387a56eef0", "6edc18ab1a954d230c1f03c590d469d2", filter?.value)
+            val getPropertyDeferred = MarvelApi.retrofitService.getComics(
+                BuildConfig.apiTimestamp,
+                BuildConfig.apiKey,
+                BuildConfig.apiHash,
+                filter?.value,
+                _limit.value
+            )
             try{
                 _status.value = MarvelApiStatus.LOADING
                 val listResult = getPropertyDeferred.await()
@@ -69,6 +72,7 @@ class GridViewViewModel : ViewModel() {
     }
 
     fun updateFilter(filter: ComicApiFilter) {
+        _limit.value = 100;
         getMarvelAppComics(filter)
     }
 }

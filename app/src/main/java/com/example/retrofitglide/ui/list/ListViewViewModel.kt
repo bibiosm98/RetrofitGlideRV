@@ -1,8 +1,11 @@
 package com.example.retrofitglide.ui.list
 
+import android.provider.Settings.Global.getString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.retrofitglide.BuildConfig
+import com.example.retrofitglide.R
 import com.example.retrofitglide.network.Comic
 import com.example.retrofitglide.network.ComicApiFilter
 import com.example.retrofitglide.network.MarvelApi
@@ -33,13 +36,15 @@ class ListViewViewModel : ViewModel() {
     init {
         getMarvelAppComics(ComicApiFilter.SHOW_ALL)
     }
+
     private fun getMarvelAppComics(filter: ComicApiFilter?){
         coroutineScope.launch {
             val getPropertyDeferred = MarvelApi.retrofitService.getComics(
-                "1",
-                "080a502746c8a60aeab043387a56eef0",
-                "6edc18ab1a954d230c1f03c590d469d2",
-                filter?.value)
+                BuildConfig.apiTimestamp,
+                BuildConfig.apiKey,
+                BuildConfig.apiHash,
+                filter?.value,
+                null)
             try{
                 _status.value = MarvelApiStatus.LOADING
                 val listResult = getPropertyDeferred.await()
