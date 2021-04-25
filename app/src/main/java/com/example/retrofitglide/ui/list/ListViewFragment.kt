@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.example.retrofitglide.databinding.ListViewFragmentBinding
+import com.example.retrofitglide.ui.grid.GridViewFragmentDirections
 import com.example.retrofitglide.ui.grid.PhotoGridAdapter
 
 class ListViewFragment : Fragment() {
@@ -25,6 +28,12 @@ class ListViewFragment : Fragment() {
             viewModel.displayComicDetails(it)
         })
 
+        viewModel.navigateToSelectedComic.observe(viewLifecycleOwner, Observer {
+            if( null != it) {
+                this.findNavController().navigate(ListViewFragmentDirections.actionListViewFragmentToDetailFragment(it))
+                viewModel.displayComicDetailsComplete()
+            }
+        })
         setHasOptionsMenu(true)
         return binding.root
     }

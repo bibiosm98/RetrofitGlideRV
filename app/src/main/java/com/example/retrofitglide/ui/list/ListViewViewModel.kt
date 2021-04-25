@@ -44,7 +44,7 @@ class ListViewViewModel : ViewModel() {
                 BuildConfig.apiKey,
                 BuildConfig.apiHash,
                 filter?.value,
-                null)
+                null) // default limit="20"
             try{
                 _status.value = MarvelApiStatus.LOADING
                 val listResult = getPropertyDeferred.await()
@@ -58,8 +58,11 @@ class ListViewViewModel : ViewModel() {
             }
         }
     }
-
     fun displayComicDetails(comic: Comic) {
         _navigateToSelectedComic.value = comic
+    }
+
+    fun displayComicDetailsComplete() {
+        _navigateToSelectedComic.value = null
     }
 }

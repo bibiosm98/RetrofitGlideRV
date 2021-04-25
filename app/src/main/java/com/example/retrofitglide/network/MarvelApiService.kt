@@ -16,9 +16,9 @@ private const val BASE_URL = "https://gateway.marvel.com/"
 
 enum class ComicApiFilter(val value: String?) {
     SHOW_ALL(null),
-    SHOW_ANT("ant"),
+    SHOW_ANT("ant-man"),
     SHOW_IRON("iron"),
-    SHOW_SPIDER("spider")
+    SHOW_SPIDER("spider-man")
 }
 
 private val moshi = Moshi.Builder()

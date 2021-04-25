@@ -32,7 +32,7 @@ class GridViewViewModel : ViewModel() {
 
     init {
         getMarvelAppComics(ComicApiFilter.SHOW_ALL)
-        _limit.value = 5;
+        _limit.value = 15;
     }
 
     private val _navigateToSelectedComic = MutableLiveData<Comic>()

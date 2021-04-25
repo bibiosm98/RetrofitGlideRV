@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitglide.databinding.ListViewItemBinding
 import com.example.retrofitglide.network.Comic
 
-
+//not used
 class PhotoListAdapter(private val onClickListener: OnClickListener) : ListAdapter<Comic, PhotoListAdapter.ComicViewHolder>(DiffCallback){
     class ComicViewHolder(private var binding: ListViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
