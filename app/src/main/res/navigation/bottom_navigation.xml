@@ -10,7 +10,11 @@
         android:id="@+id/listViewFragment"
         android:name="com.example.retrofitglide.ui.list.ListViewFragment"
         android:label="List View"
-        tools:layout="@layout/list_view_fragment" />
+        tools:layout="@layout/list_view_fragment" >
+        <action
+            android:id="@+id/action_listViewFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/gridViewFragment"

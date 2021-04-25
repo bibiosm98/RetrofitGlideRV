@@ -3,12 +3,9 @@ package com.example.retrofitglide.ui.grid
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.core.view.get
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofitglide.R
 import com.example.retrofitglide.databinding.GridViewFragmentBinding
 import com.example.retrofitglide.network.ComicApiFilter
@@ -47,7 +44,7 @@ class GridViewFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(GridViewViewModel::class.java)
+//        viewModel = ViewModelProvider(this).get(GridViewViewModel::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

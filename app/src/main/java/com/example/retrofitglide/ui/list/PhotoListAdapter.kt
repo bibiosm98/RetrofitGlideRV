@@ -1,0 +1,47 @@
+package com.example.retrofitglide.ui.list
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.retrofitglide.databinding.ListViewItemBinding
+import com.example.retrofitglide.network.Comic
+
+
+class PhotoListAdapter(private val onClickListener: OnClickListener) : ListAdapter<Comic, PhotoListAdapter.ComicViewHolder>(DiffCallback){
+    class ComicViewHolder(private var binding: ListViewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(comic: Comic){
+            binding.comic = comic
+            binding.executePendingBindings()
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<Comic>() {
+        override fun areItemsTheSame(oldItem: Comic, newItem: Comic): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Comic, newItem: Comic): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoListAdapter.ComicViewHolder {
+        return ComicViewHolder(ListViewItemBinding.inflate(LayoutInflater.from(parent.context)))
+    }
+
+    override fun onBindViewHolder(holder: PhotoListAdapter.ComicViewHolder, position: Int) {
+        val comic = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onclick(comic)
+        }
+        holder.bind(comic)
+    }
+
+    class OnClickListener(val clickListener: (comic: Comic) -> Unit) {
+        fun onclick(comic: Comic) = clickListener(comic)
+    }
+}

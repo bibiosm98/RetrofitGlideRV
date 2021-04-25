@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.retrofitglide.R
 import com.example.retrofitglide.databinding.DetailFragmentBinding
 
 class DetailFragment : Fragment() {
@@ -22,6 +21,7 @@ class DetailFragment : Fragment() {
         val viewModelFactory = DetailViewModelFactory(selectedComic, application)
         binding.viewModel = ViewModelProvider(
             this, viewModelFactory).get(DetailViewModel::class.java)
+
         return binding.root
     }
 

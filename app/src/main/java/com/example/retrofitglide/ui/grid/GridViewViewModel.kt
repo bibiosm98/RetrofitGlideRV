@@ -14,14 +14,6 @@ import kotlinx.coroutines.launch
 enum class MarvelApiStatus { LOADING, ERROR, DONE}
 class GridViewViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>()
-    val text: LiveData<String>
-        get() = _text
-
-    init {
-        _text.value = "Welcome in Grid View Fragment"
-    }
-
     private val _status = MutableLiveData<MarvelApiStatus>()
     val status: LiveData<MarvelApiStatus>
         get() = _status
@@ -30,12 +22,12 @@ class GridViewViewModel : ViewModel() {
     val comicList: LiveData<List<Comic>>
         get() = _comicList
 
-    private val _comic = MutableLiveData<Comic>()
-    val comic: LiveData<Comic>
-        get() = _comic
-    private val _comic2 = MutableLiveData<String>()
-    val comic2: LiveData<String>
-        get() = _comic2
+//    private val _comic = MutableLiveData<Comic>()
+//    val comic: LiveData<Comic>
+//        get() = _comic
+//    private val _comic2 = MutableLiveData<String>()
+//    val comic2: LiveData<String>
+//        get() = _comic2
 
 
     private var viewModelJob = Job()

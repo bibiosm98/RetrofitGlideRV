@@ -28,7 +28,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
                 RequestOptions()
                     .transform(RoundedCorners(50))
                     .placeholder(R.drawable.loading_image)
-                    .error(R.drawable.ic_baseline_grid_on_24))
+                    .error(R.drawable.ic_baseline_grid_on_24)
+                    )
             .into(imgView)
     }
 }

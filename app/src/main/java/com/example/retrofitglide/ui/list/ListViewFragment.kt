@@ -6,20 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.retrofitglide.R
+import com.example.retrofitglide.databinding.ListViewFragmentBinding
+import com.example.retrofitglide.ui.grid.PhotoGridAdapter
 
 class ListViewFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ListViewFragment()
-    }
-
     private lateinit var viewModel: ListViewViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                                 savedInstanceState: Bundle?): View? {
+        viewModel = ViewModelProvider(this).get(ListViewViewModel::class.java)
 
-        return inflater.inflate(R.layout.list_view_fragment, container, false)
+        val binding = ListViewFragmentBinding.inflate(inflater)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        binding.imagesList.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
+            viewModel.displayComicDetails(it)
+        })
+
+        setHasOptionsMenu(true)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
